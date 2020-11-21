@@ -1,17 +1,17 @@
 import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
-import { Context } from '../useSongs';
+import { Link } from 'react-router-dom';
+import { Context } from '../Context';
 
 function Styles() {
   const {songs} = useContext(Context);
+  console.log(songs);
 
   return (
-    <ul>
+    <ul className="list">
        {
          songs.map(song => (
-           <li key={song.id}>
-             <img src="" alt="headPhones"/>
-             <Link to={`/Styles/${song.id}`}><h2>{song.title}</h2></Link>
+           <li key={song.id} className="nav__items items--styles">
+             <Link to={`/Styles/${song.style}`} className="nav__link"><h2>🎧 {song.style}</h2></Link>
           </li>
          ))
        }

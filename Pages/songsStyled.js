@@ -1,26 +1,29 @@
 import React, {useContext} from 'react';
-import {useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
+import { Context } from '../Context';
 
 
 function songsStyled() {
-  const {songId} = useParams();
-  const {songs} = useContext(Context);
-  const findSongId = songs.find(data => data.id == songId);
-  console.log(findSongId);
+  const {songStyle} = useParams();
+  const { songs } = useContext(Context);
+  const filteredSongStyle = songs.filter(data => data.style == songStyle);
+
   return (
-    <div>
+    <>
+      <h2>🎧 {songStyle}</h2>
       {
-        findSongId.map(song => (
-        <div>
-          <h2>{song.style}</h2>
-          <div>
-          <h3>{song.title}</h3>
-          <p>{song.singerName}</p>
-          </div>
+       filteredSongStyle.map(song => (
+        <div key={song.id}>
+          <Link to={`/songsStyled/${song.id}`}>
+            <div className="container">
+            <h3>{song.title}</h3>
+            <p>{song.singerName}</p>
+            </div>
+          </Link>
         </div>
-        ))
+       ))
       }
-    </div>
+    </>
   )
 }
 

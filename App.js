@@ -6,6 +6,7 @@ import Header from './Components/Header';
 import Songs from './Components/Songs';
 import Styles from './Components/Styles';
 import SongsStyled from './Pages/songsStyled';
+import Lyrics from './Pages/Lyrics';
 
 function App() {
   return (
@@ -15,17 +16,20 @@ function App() {
         <Route exact path="/">
           <Songs />
         </Route>
-        <Route path="/Styles">
-          <Styles />
-        </Route>
         <Route path="/Cart">
           <Cart />
         </Route>
-        <Route exact path="/AddNewSongs">
+        <Route path="/AddNewSongs">
           <AddNewSongs />
         </Route>
-        <Route exact path="/songsStyled/:songId">
+        <Route exact path="/Styles">
+          <Styles />
+        </Route>
+        <Route exact path="/Styles/:songStyle">
           <SongsStyled />
+        </Route>
+        <Route exact path="/songsStyle/:id">
+          <Lyrics />
         </Route>
       </Switch>
     </main>
