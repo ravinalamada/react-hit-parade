@@ -2,7 +2,7 @@ import React from 'react';
 import useSongs from '../useSongs';
 
 function AddNewSongs() {
-  const  {addNewSong, handleSubmit} = useSongs();
+  const  { handleSubmit} = useSongs();
 
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -29,7 +29,7 @@ function AddNewSongs() {
           <fieldset className="form__fieldset">
           <label className="form__label"></label>
           <input className="form__input"
-                 type="text"
+                 type="number"
                  name="price"
                  placeholder="Price"
                 ></input>

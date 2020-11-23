@@ -15,6 +15,7 @@ function useSongs() {
       title: form.title.value,
       style: form.style.value,
       lyrics: form.lyrics.value,
+      price: form.price.value,
       upVotes: 0,
       downVotes: 0,
       isFavorite: false,

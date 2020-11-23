@@ -23,7 +23,7 @@ function Cart() {
 
   return (
     <>
-    <ul>
+    <ul className="cart--list">
     {carts && cardItems.map(item => (
       <li key={item.id} className="container cart--items">
       <div className="cart--container">
@@ -33,13 +33,13 @@ function Cart() {
       <span>{item.singerName}</span>
       </div>
       </div>
-      <p>{item.price}</p>
+      <p>{item.price} Ar</p>
       </li>
       ))}
       </ul>
       <div className="cart--wrapper">
       { carts ? <button onClick={handleOrder} className="submit--item">{orderBtnText}</button> : <h3>You have no item in your card</h3>}
-      { carts && <p className="total-cost">Total:{total.toLocaleString("en-US", {style: "currency", currency: "USD"})}</p>}
+      { carts && <p className="total-cost">Total: {total} Ar</p>}
       </div>
       </>
       );

@@ -34179,6 +34179,7 @@ function useSongs() {
       title: form.title.value,
       style: form.style.value,
       lyrics: form.lyrics.value,
+      price: form.price.value,
       upVotes: 0,
       downVotes: 0,
       isFavorite: false,
@@ -34235,7 +34236,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function AddNewSongs() {
   var _useSongs = (0, _useSongs2.default)(),
-      addNewSong = _useSongs.addNewSong,
       handleSubmit = _useSongs.handleSubmit;
 
   return /*#__PURE__*/_react.default.createElement("form", {
@@ -34271,7 +34271,7 @@ function AddNewSongs() {
     className: "form__label"
   }), /*#__PURE__*/_react.default.createElement("input", {
     className: "form__input",
-    type: "text",
+    type: "number",
     name: "price",
     placeholder: "Price"
   })), /*#__PURE__*/_react.default.createElement("fieldset", {
@@ -34360,7 +34360,9 @@ function Cart() {
   var carts = cardItems.length > 0; // Calculate the total price of the songs
 
   var total = cardItems.length * 100;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("ul", null, carts && cardItems.map(function (item) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("ul", {
+    className: "cart--list"
+  }, carts && cardItems.map(function (item) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: item.id,
       className: "container cart--items"
@@ -34371,7 +34373,7 @@ function Cart() {
       onClick: function onClick() {
         return removeItem(item.id);
       }
-    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, item.title), /*#__PURE__*/_react.default.createElement("span", null, item.singerName))), /*#__PURE__*/_react.default.createElement("p", null, item.price));
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, item.title), /*#__PURE__*/_react.default.createElement("span", null, item.singerName))), /*#__PURE__*/_react.default.createElement("p", null, item.price, " Ar"));
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "cart--wrapper"
   }, carts ? /*#__PURE__*/_react.default.createElement("button", {
@@ -34379,10 +34381,7 @@ function Cart() {
     className: "submit--item"
   }, orderBtnText) : /*#__PURE__*/_react.default.createElement("h3", null, "You have no item in your card"), carts && /*#__PURE__*/_react.default.createElement("p", {
     className: "total-cost"
-  }, "Total:", total.toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD"
-  }))));
+  }, "Total: ", total, " Ar")));
 }
 
 var _default = Cart;
@@ -34818,7 +34817,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49197" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58326" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
