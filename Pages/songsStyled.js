@@ -14,10 +14,10 @@ function songsStyled() {
       {
        filteredSongStyle.map(song => (
         <div key={song.id}>
-          <Link to={`/songsStyled/${song.id}`}>
+          <Link to={`/Songs/${song.id}`}>
             <div className="container">
-            <h3>{song.title}</h3>
-            <p>{song.singerName}</p>
+              <h3>{song.title}</h3>
+              <p>{song.singerName}</p>
             </div>
           </Link>
         </div>

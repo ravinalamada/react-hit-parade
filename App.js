@@ -29,6 +29,9 @@ function App() {
         <Route exact path="/Styles/:songStyle">
           <SongsStyled />
         </Route>
+        <Route exact path="/Songs/:id">
+          <Lyrics />
+        </Route>
         <Route exact path="/:id">
           <Lyrics />
         </Route>

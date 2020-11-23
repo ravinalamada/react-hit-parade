@@ -6,6 +6,7 @@ function UseContextProvider(props) {
  const [ songs, setSongs ] = useState(SongsData);
  const [cardItems, setCardItems ] = useState([]);
 
+ // Get the state
  function storedSong() {
   const lsAllSongs = JSON.parse(localStorage.getItem('songs'));
 
@@ -21,6 +22,7 @@ function UseContextProvider(props) {
   initialCartItems();
 }, []);
 
+// Get the new data
 function initialCartItems() {
   const lsCartItems = JSON.parse(localStorage.getItem('cardItems'));
   if(lsCartItems) {
@@ -28,12 +30,14 @@ function initialCartItems() {
   }
 }
 
+// set the state
 useEffect(() => {
   if(songs.length > 0) {
     localStorage.setItem('songs', JSON.stringify(songs))
   }
 }, [songs])
 
+//set the new state
 useEffect(() => {
     localStorage.setItem('cardItems', JSON.stringify(cardItems));
 }, [cardItems])
@@ -55,10 +59,7 @@ useEffect(() => {
 }
 
 function HandleCartItems(song) {
-
-  // this function will toggle the cart icon
-  toggleFavorite();
-  // add an element to an array,
+  // add an element into an array,
   setCardItems(prevItem => [...prevItem, song]);
 }
 

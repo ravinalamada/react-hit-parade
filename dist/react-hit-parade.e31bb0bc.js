@@ -34041,7 +34041,8 @@ function UseContextProvider(props) {
   var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
       cardItems = _useState4[0],
-      setCardItems = _useState4[1];
+      setCardItems = _useState4[1]; // Get the state
+
 
   function storedSong() {
     var lsAllSongs = JSON.parse(localStorage.getItem('songs'));
@@ -34056,7 +34057,7 @@ function UseContextProvider(props) {
   (0, _react.useEffect)(function () {
     storedSong();
     initialCartItems();
-  }, []);
+  }, []); // Get the new data
 
   function initialCartItems() {
     var lsCartItems = JSON.parse(localStorage.getItem('cardItems'));
@@ -34064,13 +34065,15 @@ function UseContextProvider(props) {
     if (lsCartItems) {
       setCardItems(lsCartItems);
     }
-  }
+  } // set the state
+
 
   (0, _react.useEffect)(function () {
     if (songs.length > 0) {
       localStorage.setItem('songs', JSON.stringify(songs));
     }
-  }, [songs]);
+  }, [songs]); //set the new state
+
   (0, _react.useEffect)(function () {
     localStorage.setItem('cardItems', JSON.stringify(cardItems));
   }, [cardItems]);
@@ -34090,9 +34093,7 @@ function UseContextProvider(props) {
   }
 
   function HandleCartItems(song) {
-    // this function will toggle the cart icon
-    toggleFavorite(); // add an element to an array,
-
+    // add an element into an array,
     setCardItems(function (prevItem) {
       return [].concat(_toConsumableArray(prevItem), [song]);
     });
@@ -34336,39 +34337,47 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Cart() {
+  // Grab the state from the Context
   var _useContext = (0, _react.useContext)(_Context.Context),
       cardItems = _useContext.cardItems,
-      placeHolderBtn = _useContext.placeHolderBtn;
+      placeHolderBtn = _useContext.placeHolderBtn,
+      removeItem = _useContext.removeItem;
 
   var _useState = (0, _react.useState)('Buy'),
       _useState2 = _slicedToArray(_useState, 2),
       orderBtnText = _useState2[0],
       setOrderBtnText = _useState2[1];
 
-  console.log(cardItems);
-
   function handleOrder() {
-    setOrderBtnText('Buy...');
+    setOrderBtnText('Ordering...');
     setTimeout(function () {
       console.log('Buy');
       placeHolderBtn();
     }, 3000);
-  }
+  } // Check if there is something in the card
 
-  var carts = cardItems.length > 0;
+
+  var carts = cardItems.length > 0; // Calculate the total price of the songs
+
   var total = cardItems.length * 100;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("ul", {
-    className: "container"
-  }, carts && cardItems.map(function (item) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("ul", null, carts && cardItems.map(function (item) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: item.id,
-      className: "list--cart"
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, item.title), /*#__PURE__*/_react.default.createElement("span", null, item.singerName)), /*#__PURE__*/_react.default.createElement("p", null, item.price));
+      className: "container cart--items"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart--container"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "ri-delete-bin-line trash",
+      onClick: function onClick() {
+        return removeItem(item.id);
+      }
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, item.title), /*#__PURE__*/_react.default.createElement("span", null, item.singerName))), /*#__PURE__*/_react.default.createElement("p", null, item.price));
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "cart--wrapper"
   }, carts ? /*#__PURE__*/_react.default.createElement("button", {
-    onClick: handleOrder
-  }, orderBtnText) : /*#__PURE__*/_react.default.createElement("p", null, "You have no item in your card"), /*#__PURE__*/_react.default.createElement("p", {
+    onClick: handleOrder,
+    className: "submit--item"
+  }, orderBtnText) : /*#__PURE__*/_react.default.createElement("h3", null, "You have no item in your card"), carts && /*#__PURE__*/_react.default.createElement("p", {
     className: "total-cost"
   }, "Total:", total.toLocaleString("en-US", {
     style: "currency",
@@ -34442,60 +34451,7 @@ function Header() {
 Header.propTypes = {};
 var _default = Header;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../icons/filled-shopping-cart.svg":"icons/filled-shopping-cart.svg","prop-types":"node_modules/prop-types/index.js"}],"useHover.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = require("react");
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function useHover() {
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isHovered = _useState2[0],
-      setIsHovered = _useState2[1];
-
-  var ref = (0, _react.useRef)();
-
-  function enter() {
-    setIsHovered(true);
-  }
-
-  function leave() {
-    setIsHovered(false);
-  }
-
-  (0, _react.useEffect)(function () {
-    var node = ref.current;
-    node.addEventListener('mouseenter', enter);
-    node.addEventListener('mouseleave', leave);
-    return function () {
-      // clean up phase, this will run when the component unmount
-      node.removeEventListener('mouseenter', enter);
-      node.removeEventListener('mouseleave', leave);
-    };
-  }, []);
-  return [ref, isHovered];
-}
-
-var _default = useHover;
-exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"Components/Songs.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../icons/filled-shopping-cart.svg":"icons/filled-shopping-cart.svg","prop-types":"node_modules/prop-types/index.js"}],"Components/Songs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34511,50 +34467,31 @@ var _Context = require("../Context");
 
 var _useSongs2 = _interopRequireDefault(require("../useSongs"));
 
-var _useHover3 = _interopRequireDefault(require("../useHover"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function Songs(_ref) {
   var song = _ref.song;
-  console.log(song);
 
   var _useContext = (0, _react.useContext)(_Context.Context),
-      songs = _useContext.songs,
       toggleFavorite = _useContext.toggleFavorite,
-      HandleCartItems = _useContext.HandleCartItems;
+      HandleCartItems = _useContext.HandleCartItems,
+      cardItems = _useContext.cardItems,
+      removeItem = _useContext.removeItem;
 
   var _useSongs = (0, _useSongs2.default)(),
       handleUpvotes = _useSongs.handleUpvotes,
       handleDownVotes = _useSongs.handleDownVotes;
-
-  var _useHover = (0, _useHover3.default)(),
-      _useHover2 = _slicedToArray(_useHover, 2),
-      ref = _useHover2[0],
-      isHovered = _useHover2[1];
 
   function favoriteIcon() {
     if (song.isFavorite) {
       return /*#__PURE__*/_react.default.createElement("i", {
         className: "ri-heart-fill favorite",
         onClick: function onClick() {
-          return toggleFavorite(song.id);
+          return removeItem(song.id);
         }
       });
     } else {
@@ -34567,17 +34504,21 @@ function Songs(_ref) {
     }
   }
 
-  function cartIcon() {
-    if (song.isFavorite) {
+  function showCartItem() {
+    var isAlreadyINCart = cardItems.some(function (item) {
+      return item.id === song.id;
+    });
+
+    if (isAlreadyINCart) {
       return /*#__PURE__*/_react.default.createElement("i", {
         className: "ri-shopping-cart-fill",
         onClick: function onClick() {
-          return HandleCartItems(song);
+          return removeItem(song.id);
         }
       });
     } else {
       return /*#__PURE__*/_react.default.createElement("i", {
-        className: "ri-shopping-cart-2-line",
+        className: "ri-shopping-cart-line ri-fw ri-1x cart",
         onClick: function onClick() {
           return HandleCartItems(song);
         }
@@ -34590,8 +34531,7 @@ function Songs(_ref) {
   }, /*#__PURE__*/_react.default.createElement("section", {
     className: "section"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "wrapper wrapper--title",
-    ref: ref
+    className: "wrapper wrapper--title"
   }, favoriteIcon(), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
     className: "section__heading"
   }, song.title), /*#__PURE__*/_react.default.createElement("p", null, song.singerName))), /*#__PURE__*/_react.default.createElement("div", {
@@ -34605,9 +34545,8 @@ function Songs(_ref) {
     onClick: handleDownVotes,
     id: song.id
   }, "\u2193 ", song.downVotes)), /*#__PURE__*/_react.default.createElement("div", {
-    className: "wrapper",
-    ref: ref
-  }, cartIcon(), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    className: "wrapper"
+  }, showCartItem(), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/".concat(song.id),
     className: "link--more"
   }, /*#__PURE__*/_react.default.createElement("span", {
@@ -34617,7 +34556,7 @@ function Songs(_ref) {
 
 var _default = Songs;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js","../useSongs":"useSongs.js","../useHover":"useHover.js"}],"Components/Styles.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js","../useSongs":"useSongs.js"}],"Components/Styles.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34727,7 +34666,7 @@ function songsStyled() {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: song.id
     }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: "/songsStyled/".concat(song.id)
+      to: "/Songs/".concat(song.id)
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "container"
     }, /*#__PURE__*/_react.default.createElement("h3", null, song.title), /*#__PURE__*/_react.default.createElement("p", null, song.singerName))));
@@ -34765,9 +34704,17 @@ function Lyrics() {
   var findId = songs.find(function (song) {
     return song.id === id;
   });
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, findId.singerName, ": ", findId.title), /*#__PURE__*/_react.default.createElement("p", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", {
+    className: "songName"
+  }, findId.singerName, ": ", findId.title), /*#__PURE__*/_react.default.createElement("div", {
     className: "container"
-  }, findId.lyrics)));
+  }, /*#__PURE__*/_react.default.createElement("h2", {
+    style: {
+      color: '#ff8906'
+    }
+  }, "Lyrics:"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "lyrics"
+  }, findId.lyrics))));
 }
 
 var _default = Lyrics;
@@ -34817,6 +34764,9 @@ function App() {
     exact: true,
     path: "/Styles/:songStyle"
   }, /*#__PURE__*/_react.default.createElement(_songsStyled.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    exact: true,
+    path: "/Songs/:id"
+  }, /*#__PURE__*/_react.default.createElement(_Lyrics.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/:id"
   }, /*#__PURE__*/_react.default.createElement(_Lyrics.default, null))));
@@ -34868,7 +34818,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60495" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49197" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

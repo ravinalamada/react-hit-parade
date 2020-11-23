@@ -1,4 +1,5 @@
 body {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
   background: #E5E5E5;
   margin: 0;
   padding: 0;
@@ -6,6 +7,14 @@ body {
 
 main {
   margin: 16px;
+}
+
+.article,
+.container,
+.songName,
+.form {
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 .header__heading {
@@ -31,6 +40,14 @@ main {
 .nav__link,
 .link--more {
   text-decoration: none;
+}
+
+.nav__link:hover {
+  color: #e53170;
+}
+
+.link--more {
+  margin-bottom: 1rem;
 }
 
 .section,
@@ -91,7 +108,6 @@ main {
   margin-left: 48px;
   color: white;
   font-size: 40px;
-  margin-top: -1rem;
 }
 
 .favorite {
@@ -99,18 +115,16 @@ main {
   margin-right: 48px;
 }
 
-.list--cart,
-.cart--wrapper {
+.cart--items,
+.cart--wrapper,
+.cart--container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   list-style: none;
-  // margin-bottom: 32px;
 }
 
 .form {
-
-  &--container{}
 
   &__fieldset {
     padding: 0;
@@ -135,13 +149,24 @@ main {
   &__select,
   &__textarea {
     border-color: transparent;
-    background-color: turquoise;
+    background-color: #BAE8E8;
     width: 100%;
     padding: 16px;
     margin-top: 16px;
   }
 
-  &--submit {
+  &__input:hover,
+  &__input:focus,
+  &__select:hover,
+  &__select:focus,
+  &__textarea:hover,
+  &__textarea:focus {
+    background-color: #ff8906;
+    border-color: #0f0e17;
+  }
+
+  &--submit,
+  .submit--item {
     padding-top: 16px;
     padding-left: 20px;
     padding-right: 20px;
@@ -150,6 +175,43 @@ main {
     margin-top: 16px;
     margin-left: 48px;
   }
+
+  &--submit {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #0f0e17;
+  }
+}
+
+.list--container {
+  display: grid;
+  grid-template-columns: auto;
+  column-gap: 16px;
+}
+
+.cart--container {
+  align-items: center;
+}
+
+.lyrics {
+  font-size: 20px;
+  width: 40%;
+}
+
+.submit--item {
+  padding-top: 16px;
+  padding-left: 32px;
+  padding-bottom: 16px;
+  padding-right: 32px;
+  border-radius: 8px;
+  background-color: #ff8906;
+  color: #fffffe;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.trash {
+  margin-right: 32px;
 }
 
 @media (min-width: 800px) {

@@ -11,10 +11,13 @@ function Lyrics() {
 
   return (
     <>
-      {  <div>
-          <h2>{findId.singerName}: {findId.title}</h2>
-          <p className="container">{findId.lyrics}</p>
-         </div>
+      { <div>
+          <h2 className="songName">{findId.singerName}: {findId.title}</h2>
+          <div className="container">
+            <h2 style={{color: '#ff8906'}}>Lyrics:</h2>
+            <p className="lyrics">{findId.lyrics}</p>
+          </div>
+        </div>
        }
     </>
   )
