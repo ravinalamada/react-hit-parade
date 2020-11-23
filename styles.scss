@@ -28,7 +28,8 @@ main {
   list-style: none;
 }
 
-.nav__link {
+.nav__link,
+.link--more {
   text-decoration: none;
 }
 
@@ -76,19 +77,25 @@ main {
   margin-inline-start: 125px;
 }
 
+.cart--wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
 .cart {
 	font-size: 1.2rem;
-  position: absolute;
-  top: 118px;
-  right: 83px;
   cursor: pointer;
 }
 
 .more {
   margin-left: 48px;
+  color: white;
+  font-size: 40px;
+  margin-top: -1rem;
 }
 
 .favorite {
+  color: yellow;
   margin-right: 48px;
 }
 
@@ -101,11 +108,61 @@ main {
   // margin-bottom: 32px;
 }
 
-@media (min-width: 800px) {
+.form {
 
+  &--container{}
+
+  &__fieldset {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__fieldset,
+  &__input,
+  &--submit {
+    border-color: transparent;
+  }
+
+  &__fieldset,
+  &__input,
+  &--submit,
+  &__select,
+  &__textarea {
+    border-radius: 8px;
+  }
+
+  &__input,
+  &__select,
+  &__textarea {
+    border-color: transparent;
+    background-color: turquoise;
+    width: 100%;
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  &--submit {
+    padding-top: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 16px;
+    background-color: violet;
+    margin-top: 16px;
+    margin-left: 48px;
+  }
+}
+
+@media (min-width: 800px) {
   main {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
   }
+
+  .form--container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
 }

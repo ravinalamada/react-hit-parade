@@ -15,8 +15,6 @@ function AddNewSongs() {
                  type="text"
                  placeholder="Title"
                  name="title"
-                //  value={addNewSong}
-                //  onChange={handleAddNewSongs}
                 >
           </input>
           </fieldset>
@@ -26,8 +24,6 @@ function AddNewSongs() {
                  type="text"
                  name="singerName"
                  placeholder="Artist"
-                //  value={addNewSong}
-                //  onChange={handleAddNewSongs}
                 ></input>
           </fieldset>
           <fieldset className="form__fieldset">
@@ -36,15 +32,11 @@ function AddNewSongs() {
                  type="text"
                  name="price"
                  placeholder="Price"
-                //  value={addNewSong}
-                //  onChange={handleAddNewSongs}
                 ></input>
           </fieldset>
           <fieldset className="form__fieldset">
           <label className="form__label"></label>
-          <select name="style"
-          // value={addNewSong} onChange={handleAddNewSongs}
-          >
+          <select name="style" className="form__select">
             <option>Styles</option>
             <option value="kawitry">Kawitry</option>
             <option value="salegy">Salegy</option>
@@ -54,13 +46,12 @@ function AddNewSongs() {
             <option value="danceall">DanceAll</option>
           </select>
           </fieldset>
-          <fieldset>
+          <fieldset className="form__fieldset">
             <textarea placeholder="Lyrics"
                       cols="50"
-                      rows="4"
+                      rows="8"
                       name="lyrics"
-                      // value={addNewSong}
-                      // onChange={handleAddNewSongs}
+                      className="form__textarea"
                       ></textarea>
           </fieldset>
         </div>

@@ -6,13 +6,17 @@ import { Context } from '../Context';
 function Lyrics() {
   const {id} = useParams();
   const { songs } = useContext(Context);
-
+  // Find song id that I am going to display
   const findId = songs.find(song => song.id === id);
-  console.log(findId);
-  return (
-    <div>
 
-    </div>
+  return (
+    <>
+      {  <div>
+          <h2>{findId.singerName}: {findId.title}</h2>
+          <p className="container">{findId.lyrics}</p>
+         </div>
+       }
+    </>
   )
 }
 

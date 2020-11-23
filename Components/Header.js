@@ -20,7 +20,7 @@ function Header() {
             </Link>
           </li>
           <li className="nav__items">
-            <Link className="nav__link" to="/Cart">
+            <Link className="nav__link cart--wrapper" to="/Cart">
               <img src={filledShoppingCart} className="cart"/>
               <h2 className="header__heading">Cart</h2>
             </Link>

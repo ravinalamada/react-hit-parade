@@ -5,6 +5,7 @@ import Cart from './Pages/Cart';
 import Header from './Components/Header';
 import Songs from './Components/Songs';
 import Styles from './Components/Styles';
+import MappedSongs from './Pages/MappedSongs';
 import SongsStyled from './Pages/songsStyled';
 import Lyrics from './Pages/Lyrics';
 
@@ -14,7 +15,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <Songs />
+          <MappedSongs />
         </Route>
         <Route path="/Cart">
           <Cart />
@@ -28,7 +29,7 @@ function App() {
         <Route exact path="/Styles/:songStyle">
           <SongsStyled />
         </Route>
-        <Route exact path="/songsStyle/:id">
+        <Route exact path="/:id">
           <Lyrics />
         </Route>
       </Switch>
